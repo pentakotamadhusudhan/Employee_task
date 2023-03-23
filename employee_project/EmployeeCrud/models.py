@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 # Create your models here.
 Gender = [
@@ -8,45 +9,46 @@ Gender = [
 ]
 
 
-class EmployeeModel(models.Model):
-    EmpId = models.CharField(max_length=100,)
+class employeeModel(models.Model):
+    regId = models.CharField(primary_key=True,max_length=100)
     Name = models.CharField(max_length=200)
     Email = models.EmailField(unique=True,)
     Age = models.IntegerField()
     Gender = models.CharField(max_length=100,choices=Gender)
-    PhoneNo = models.CharField(max_length=10)
+
+    PhoneNo = models.CharField(max_length=14, unique=True)
     AddressDetails = models.TextField()
     HouseNo = models.CharField(max_length=200)
     Street = models.CharField(max_length=200)
     City = models.CharField(max_length=200)
     State = models.CharField(max_length=200)
-    # WorkExperience = models.CharField(max_length=1000)
-    CompanyName = models.CharField(max_length=200)
-    FromDate = models.DateField()
-    ToDate = models.DateField(max_length=200)
-    CompanyAddress = models.CharField(max_length=200)
-    # Qualifications = models.ForeignKey(qualificationmodel,related_name='qualification',on_delete=models.CASCADE)
-    QualificationName = models.CharField(max_length=200)
-    Precentage = models.CharField(max_length=200)
-    # Projects = models.ForeignKey(percentagemodel,related_name="project",on_delete=models.CASCADE)
-    Title = models.CharField(max_length=200)
-    Description = models.CharField(max_length=200)
-    Photo = models.CharField(max_length=1000)
+    Photo = models.TextField()
+    objects = models.Manager
+
+    class Meta:
+        db_table = "employeeCollection"
+
+
+class projectModel(models.Model):
+    regId = models.ForeignKey(employeeModel,on_delete=models.CASCADE,related_name='project')
+    title = models.CharField(max_length=1000)
+    description = models.TextField(max_length=1000)
     objects = models.Manager
 
 
-class projectmodel(models.Model):
-    empId = models.ForeignKey(EmployeeModel,on_delete=models.CASCADE,related_name='projects')
-    Title = models.CharField(max_length=1000)
-    description = models.TextField(max_length=1000)
-    # objects = models.Manager
 
-
-
-class qualificationmodel(models.Model):
-    empId = models.ForeignKey(EmployeeModel,on_delete=models.CASCADE,related_name='qualification')
+class qualificationModel(models.Model):
+    regId = models.ForeignKey(employeeModel,on_delete=models.CASCADE,related_name='qualifications')
     qualificationName = models.TextField(max_length=1000)
     fromDate = models.DateField()
     toDate = models.DateField()
     percentage =models.IntegerField()
-    # objects = models.Manager
+    objects = models.Manager
+class work_Experience(models.Model):
+    regId = models.ForeignKey(employeeModel,on_delete=models.CASCADE,related_name='workExperience')
+    workExperience = models.CharField(max_length=1000)
+    companyName = models.CharField(max_length=200)
+    fromDate = models.DateField()
+    toDate = models.DateField(max_length=200)
+    companyAddress = models.CharField(max_length=200)
+    objects = models.Manager
