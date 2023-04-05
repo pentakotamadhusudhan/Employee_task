@@ -25,6 +25,7 @@ class employeeModel(models.Model):
     Photo = models.TextField()
     objects = models.Manager
 
+
     class Meta:
         db_table = "employeeCollection"
 
@@ -44,6 +45,8 @@ class qualificationModel(models.Model):
     toDate = models.DateField()
     percentage =models.IntegerField()
     objects = models.Manager
+
+    
 class work_Experience(models.Model):
     regId = models.ForeignKey(employeeModel,on_delete=models.CASCADE,related_name='workExperience')
     workExperience = models.CharField(max_length=1000)
