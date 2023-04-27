@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter,SimpleRouter
 
 
 router = SimpleRouter()
-router.register("Madhu",popllview)
+router.register("Employee",popllview)
 
 
 urlpatterns = [

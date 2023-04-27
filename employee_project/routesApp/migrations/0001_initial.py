@@ -28,6 +28,9 @@ class Migration(migrations.Migration):
                 ('State', models.CharField(max_length=200)),
                 ('Photo', models.TextField()),
             ],
+            options={
+                'db_table': 'employeeCollection',
+            },
         ),
         migrations.CreateModel(
             name='work_Experience',
@@ -38,7 +41,7 @@ class Migration(migrations.Migration):
                 ('fromDate', models.DateField()),
                 ('toDate', models.DateField(max_length=200)),
                 ('companyAddress', models.CharField(max_length=200)),
-                ('regId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='workExperience', to='EmployeeCrud.employeemodel')),
+                ('regId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='workExperience', to='routesApp.employeemodel')),
             ],
         ),
         migrations.CreateModel(
@@ -49,7 +52,7 @@ class Migration(migrations.Migration):
                 ('fromDate', models.DateField()),
                 ('toDate', models.DateField()),
                 ('percentage', models.IntegerField()),
-                ('regId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='qualifications', to='EmployeeCrud.employeemodel')),
+                ('regId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='qualifications', to='routesApp.employeemodel')),
             ],
         ),
         migrations.CreateModel(
@@ -58,7 +61,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=1000)),
                 ('description', models.TextField(max_length=1000)),
-                ('regId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='project', to='EmployeeCrud.employeemodel')),
+                ('regId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='project', to='routesApp.employeemodel')),
             ],
         ),
     ]

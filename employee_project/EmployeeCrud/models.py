@@ -26,8 +26,6 @@ class employeeModel(models.Model):
     objects = models.Manager
 
 
-    class Meta:
-        db_table = "employeeCollection"
 
 
 class projectModel(models.Model):

@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'EmployeeProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': "djongo",
-        'NAME': "EmployeeProject",
+        'NAME': "empPRoject",
 
     }
 }
