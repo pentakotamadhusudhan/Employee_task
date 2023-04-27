@@ -3,26 +3,28 @@ from rest_framework.response import Response
 from  ..Crud.base64_convertion import *
 from ..models import employeeModel
 from rest_framework import generics
+from rest_framework.parsers import FormParser, MultiPartParser
 
 from ..serilizers import *
 
 
 class Updateview(generics.GenericAPIView):
-    serializer_class = registration_serilizer
+    serializer_class = Updateserializer
+    parser_classes = (FormParser, MultiPartParser)
 
     def put(self,request,regId):
         try:
             d = employeeModel.objects.get(regId=regId)
             x= request.data.get('Photo')
-            bimage = get_as_base64(x)
+            # bimage = get_as_base64(x)
             ser = registration_serilizer(instance=d,data=request.data)
             ser.is_valid()
             ser.save()
-            d.Photo = bimage
+
             d.save()
             return Response({
                 "Status": 200,
-                "Resuly": {"message": "employee created successfully",
+                "Resuly": {"message": "employee updated successfully",
                            "regid": regId,
                            "success": True}
             })
@@ -33,10 +35,11 @@ class Updateview(generics.GenericAPIView):
                                         "sucess": False}
                              })
 
-        except:
+        except Exception as e:
             return Response({
+
                 "status": 500,
-                'Result': {"message": "employee created failed",
+                'Result': {"message": "employee update failed",
                            "sucess": False},
             })
 
