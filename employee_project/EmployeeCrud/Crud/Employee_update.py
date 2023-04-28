@@ -121,7 +121,7 @@ class projectupdateview(viewsets.ModelViewSet):
     serializer_class = projectSerilizer
     queryset = projectModel.objects.all()
     lookup_field = "regId"
-    parser_classes = (FormParser, MultiPartParser)
+    # parser_classes = (FormParser, MultiPartParser)
 
 
     # def put(self,request,regId):
