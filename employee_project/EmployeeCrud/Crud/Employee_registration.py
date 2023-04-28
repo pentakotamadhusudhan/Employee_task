@@ -1,5 +1,6 @@
 from djongo.database import DatabaseError
 from rest_framework import generics
+from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 
 from ..models import employeeModel
@@ -7,13 +8,14 @@ from ..serilizers import *
 
 class employeeRegistration(generics.GenericAPIView):
     """
-    You can create a EMployee
+    You can create  Employee
     Email is unique
     After fill the form
     You can get Employee ID like EMP000
     **Note* : * provide image Url,not image path, because in models we have taken as CharFileld for Base64 and we are uploading image file
     """
     serializer_class = registration_serilizer
+    parser_classes = (FormParser, MultiPartParser)
 
     def post(self,request):
         try:
@@ -35,13 +37,15 @@ class employeeRegistration(generics.GenericAPIView):
                                        "sucess": True},
                              })
         except AssertionError:
-            print({"Status":400})
-            return Response({"status":400,
-                             'Result':{"message": "invalid body request",
-                              "sucess": False},
-                             })
+                print({"Status":400})
+                return Response({"status":400,
+                                 'Result':{"message": "invalid body request",
+                                  "sucess": False},
+                                 })
 
-        except:
+        except Exception as e:
+            print(e)
+
             return Response({
                              "status":500,
                              'Result':{"message": "employee created failed",
@@ -50,6 +54,8 @@ class employeeRegistration(generics.GenericAPIView):
 
 class projectmodel_view(generics.GenericAPIView):
     serializer_class = projectSerilizer
+    parser_classes = (FormParser, MultiPartParser)
+
 
     def post(self,request):
         try:
@@ -79,6 +85,7 @@ class projectmodel_view(generics.GenericAPIView):
 
 class workingview(generics.GenericAPIView):
     serializer_class = workserializer
+    parser_classes = (FormParser, MultiPartParser)
 
     def post(self,request):
         Empid = request.data.get('regId')
@@ -109,6 +116,8 @@ class workingview(generics.GenericAPIView):
 
 class qualificationview(generics.GenericAPIView):
     serializer_class =  qualificationserializer
+    parser_classes = (FormParser, MultiPartParser)
+
 
     def post(self,request):
         Empid = request.data.get('regId')

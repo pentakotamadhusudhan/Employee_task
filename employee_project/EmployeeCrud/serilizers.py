@@ -34,7 +34,7 @@ class registration_serilizer(serializers.ModelSerializer):
         fields = ['Name','Email','Age','Gender','PhoneNo','AddressDetails','HouseNo','Street','City','State','Photo']
     def create(self,validated_data):
         imgg = validated_data['Photo']
-        bImage = get_as_base64(imgg)
+        # bImage = get_as_base64(imgg)
         x = id_check()
         user = employeeModel.objects.create(regId = x,
                                             Name=validated_data['Name'],
@@ -47,7 +47,7 @@ class registration_serilizer(serializers.ModelSerializer):
                                             Street = validated_data['Street'],
                                             City = validated_data['City'],
                                             State = validated_data['State'],
-                                            Photo = bImage,)
+                                            Photo = validated_data['Photo'],)
         print(user)
         return user
 

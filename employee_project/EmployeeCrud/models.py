@@ -3,8 +3,8 @@ from django.core.validators import RegexValidator
 
 # Create your models here.
 Gender = [
-    ('M', 'Male'),
-    ('F', 'Female'),
+    ('MALE', 'Male'),
+    ('FEMALE', 'Female'),
 
 ]
 
@@ -15,21 +15,20 @@ class employeeModel(models.Model):
     Email = models.EmailField(unique=True,)
     Age = models.IntegerField()
     Gender = models.CharField(max_length=100,choices=Gender)
-
     PhoneNo = models.CharField(max_length=14, unique=True)
     AddressDetails = models.TextField()
     HouseNo = models.CharField(max_length=200)
     Street = models.CharField(max_length=200)
     City = models.CharField(max_length=200)
     State = models.CharField(max_length=200)
-    Photo = models.TextField()
+    Photo = models.ImageField(upload_to="upload")
     objects = models.Manager
 
 
 
 
 class projectModel(models.Model):
-    regId = models.ForeignKey(employeeModel,on_delete=models.CASCADE,related_name='project')
+    regId = models.OneToOneField(employeeModel,on_delete=models.CASCADE,related_name='project')
     title = models.CharField(max_length=1000)
     description = models.TextField(max_length=1000)
     objects = models.Manager
@@ -37,7 +36,7 @@ class projectModel(models.Model):
 
 
 class qualificationModel(models.Model):
-    regId = models.ForeignKey(employeeModel,on_delete=models.CASCADE,related_name='qualifications')
+    regId = models.OneToOneField(employeeModel,on_delete=models.CASCADE,related_name='qualifications')
     qualificationName = models.TextField(max_length=1000)
     fromDate = models.DateField()
     toDate = models.DateField()
@@ -46,7 +45,7 @@ class qualificationModel(models.Model):
 
     
 class work_Experience(models.Model):
-    regId = models.ForeignKey(employeeModel,on_delete=models.CASCADE,related_name='workExperience')
+    regId = models.OneToOneField(employeeModel,on_delete=models.CASCADE,related_name='workExperience')
     workExperience = models.CharField(max_length=1000)
     companyName = models.CharField(max_length=200)
     fromDate = models.DateField()
