@@ -62,14 +62,15 @@ class workserializer(serializers.ModelSerializer):
 
 
 class get_serializer(serializers.ModelSerializer):
-    qualifications = qualificationserializer(read_only=True,many=True)
-    project = projectSerilizer(read_only=True,many=True)
-    workExperience = workserializer(read_only=True,many=True)
+    qualifications = qualificationserializer(read_only=True)
+    project = projectSerilizer(read_only=True)
+    workexper = workserializer(read_only=True)
     class Meta:
         model = employeeModel
-        fields = ['Name','Email','Age','Gender','PhoneNo','AddressDetails','HouseNo','Street','City','State','workExperience','Photo','qualifications','project']
+        fields = ['Name','Email','Age','Gender','PhoneNo','AddressDetails','HouseNo','Street','City','State','workexper','Photo','qualifications','project']
 
-    depth = 1
+
+    # depth = 1
 
 
 

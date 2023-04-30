@@ -45,7 +45,7 @@ class qualificationModel(models.Model):
 
     
 class work_Experience(models.Model):
-    regId = models.OneToOneField(employeeModel,on_delete=models.CASCADE,related_name='workExperience')
+    regId = models.OneToOneField(employeeModel,on_delete=models.CASCADE,related_name='workexper')
     workExperience = models.CharField(max_length=1000)
     companyName = models.CharField(max_length=200)
     fromDate = models.DateField()

@@ -54,13 +54,12 @@ class employeeRegistration(generics.GenericAPIView):
 
 class projectmodel_view(generics.GenericAPIView):
     serializer_class = projectSerilizer
-    parser_classes = (FormParser, MultiPartParser)
-
+    # parser_classes = (FormParser, MultiPartParser)
 
     def post(self,request):
         try:
             regId = request.data.get('regId')
-            ser = self.get_serializer(data=request.data)
+            ser = projectSerilizer(data=request.data)
             ser.is_valid()
             resp = ser.save()
 
