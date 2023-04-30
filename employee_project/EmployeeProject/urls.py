@@ -27,8 +27,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Employee",
-        default_version="0.0.1",
+        title="FINCO",
+        subprocess = "Employee",
+        default_version="1.2.0",
         name='openapi-schema',
     ),
     public=True,
