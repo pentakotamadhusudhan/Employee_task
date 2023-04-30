@@ -1,11 +1,14 @@
 from rest_framework import generics
 from rest_framework.response import Response
 
+from rest_framework.permissions import IsAuthenticated
 from ..models import employeeModel
 from ..serilizers import deleteserialzer
 
 class Employee_delete(generics.GenericAPIView):
     serializer_class =deleteserialzer
+    permission_classes = [IsAuthenticated]
+
 
     def delete(self,request,regId):
         """ Delete  the Employee details including

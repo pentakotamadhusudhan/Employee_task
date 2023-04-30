@@ -2,7 +2,7 @@ from djongo.database import DatabaseError
 from rest_framework import generics
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
-from rest_framework import authtoken
+from rest_framework.permissions import IsAuthenticated
 from ..models import employeeModel
 from ..serilizers import *
 
@@ -16,6 +16,7 @@ class employeeRegistration(generics.GenericAPIView):
     """
     serializer_class = registration_serilizer
     parser_classes = (FormParser, MultiPartParser)
+    permission_classes = [IsAuthenticated]
 
     def post(self,request):
         try:
@@ -54,6 +55,8 @@ class employeeRegistration(generics.GenericAPIView):
 
 class projectmodel_view(generics.GenericAPIView):
     serializer_class = projectSerilizer
+    permission_classes = [IsAuthenticated]
+
     # parser_classes = (FormParser, MultiPartParser)
 
     def post(self,request):
@@ -84,6 +87,8 @@ class projectmodel_view(generics.GenericAPIView):
 
 class workingview(generics.GenericAPIView):
     serializer_class = workserializer
+    permission_classes = [IsAuthenticated]
+
     parser_classes = (FormParser, MultiPartParser)
 
     def post(self,request):
@@ -115,6 +120,8 @@ class workingview(generics.GenericAPIView):
 
 class qualificationview(generics.GenericAPIView):
     serializer_class =  qualificationserializer
+    permission_classes = [IsAuthenticated]
+
     parser_classes = (FormParser, MultiPartParser)
 
 

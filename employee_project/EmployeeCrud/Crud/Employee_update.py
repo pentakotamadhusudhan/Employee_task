@@ -2,6 +2,8 @@ from rest_framework import generics
 from rest_framework.response import Response
 from  ..Crud.base64_convertion import *
 from ..models import *
+from rest_framework.permissions import IsAuthenticated
+
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -11,6 +13,8 @@ from ..serilizers import *
 
 class Updateview(generics.GenericAPIView):
     serializer_class = Updateserializer
+    permission_classes = [IsAuthenticated]
+
     parser_classes = (FormParser, MultiPartParser)
 
     def put(self,request,regId):
@@ -49,6 +53,8 @@ class Updateview(generics.GenericAPIView):
 
 class ProjectUpdate(generics.GenericAPIView):
     serializer_class = projectSerilizer
+    permission_classes = [IsAuthenticated]
+
     parser_classes = (FormParser, MultiPartParser)
 
     def put(self,request):
@@ -87,6 +93,8 @@ class ProjectUpdate(generics.GenericAPIView):
 
 class WorkUpdate(generics.GenericAPIView):
     serializer_class = workserializer
+    permission_classes = [IsAuthenticated]
+
     parser_classes = (FormParser, MultiPartParser)
 
     def put(self,request):
@@ -126,6 +134,8 @@ class WorkUpdate(generics.GenericAPIView):
 
 class qualificationupdateview(generics.GenericAPIView):
     serializer_class = qualificationserializer
+    permission_classes = [IsAuthenticated]
+
     parser_classes = (FormParser, MultiPartParser)
 
     def put(self,request):
